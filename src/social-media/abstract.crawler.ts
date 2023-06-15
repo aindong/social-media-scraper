@@ -1,4 +1,4 @@
-import type { Browser, Page } from 'puppeteer';
+import type { Browser } from 'puppeteer';
 import type { Influencer } from '../types/influencer';
 import type { Crawler } from '../types/crawler';
 

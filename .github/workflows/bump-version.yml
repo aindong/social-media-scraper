@@ -30,7 +30,7 @@ jobs:
           node-version: '18.x'
           cache: 'pnpm'
       - name: install conventional-changelog dependency
-        run: pnpm add -D conventional-changelog
+        run: pnpm install --dev
       - name: Bump version and push tag
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3

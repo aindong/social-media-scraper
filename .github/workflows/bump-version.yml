@@ -1,0 +1,46 @@
+name: Bump version
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'yarn.lock'
+      - 'CHANGELOG.md'
+      - 'dist/**/*'
+  workflow_dispatch: # Allow manual invocation of the workflow
+
+jobs:
+  bump-version:
+    name: Bump version
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+      - name: install conventional-changelog dependency
+        run: pnpm add -D conventional-changelog
+      - name: Bump version and push tag
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.GH_SECRET_TOKEN }}
+          git-message: 'chore(release): {version}'
+          release-count: 0
+          skip-on-empty: false
+          config-file-path: '.versionrc.js'
+      - name: Create Release
+        uses: actions/create-release@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_SECRET_TOKEN }}
+        with:
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}

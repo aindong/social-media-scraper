@@ -21,10 +21,14 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - name: Set up node
         uses: actions/setup-node@v2
         with:
           node-version: '18.x'
+          cache: 'pnpm'
       - name: install conventional-changelog dependency
         run: pnpm add -D conventional-changelog
       - name: Bump version and push tag

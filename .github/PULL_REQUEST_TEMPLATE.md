@@ -32,4 +32,17 @@ When reviewing this pull request, please consider the following:
 - [ ] The proposed changes align with the project's objectives and requirements.
 - [ ] The code is readable, maintainable, and follows best practices.
 - [ ] The changes have been tested thoroughly and address the problem or enhancement.
-- [ ] The documentation (comments
+- [ ] The documentation (comments, README, etc.) has been updated to reflect the changes.
+- [ ] Any potential edge cases or error scenarios have been handled appropriately.
+- [ ] The changes do not introduce any performance or security concerns.
+- [ ] Any questions, concerns, or suggestions have been communicated clearly.
+
+## Definition of Done
+
+This pull request is considered "done" when it meets the following criteria:
+
+- [ ] The proposed changes have been reviewed and approved by at least one reviewer.
+- [ ] Any requested changes have been addressed and incorporated into the codebase.
+- [ ] The code has been merged into the main branch and deployed to the appropriate environment.
+
+Thank you for your contribution! We appreciate your time and effort in improving the project. Happy coding! 🚀

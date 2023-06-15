@@ -6,6 +6,9 @@ import { InstagramCrawler } from './social-media/instagram.crawler';
 import { TiktokCrawler } from './social-media/tiktok.crawler';
 import { Config } from './utils/config';
 import { readFile } from './utils/fileManager';
+import { CrawlerFactory } from './social-media/crawler.factory';
+import { outputCSV } from './utils/outputCSV';
+import { Influencer } from './types/influencer';
 
 async function getProfilesToCrawl(): Promise<string[]> {
   const profiles = await readFile('profiles.txt');
@@ -28,41 +31,30 @@ async function main() {
   const profiles = await getProfilesToCrawl();
 
   console.info(chalk.blue(`Crawling ${profiles.length} profiles`));
+  const data: Influencer[] = [];
   while (profiles.length > 0) {
     const profile = profiles.pop();
     if (profile) {
-      let crawler: Crawler | null = null;
-      // check what social media it is
-      // if tiktok, create a tiktok crawler
-      // if instagram, create an instagram crawler
-      if (profile.includes('instagram.com')) {
-        // create a tiktok crawler
-        crawler = new InstagramCrawler(browser, profile);
-      }
+      let crawler: Crawler = CrawlerFactory.createCrawler({
+        browser,
+        profileUrl: profile,
+      });
 
-      if (profile.includes('tiktok.com')) {
-        // create a tiktok crawler
-        crawler = new TiktokCrawler(browser, profile);
-      }
-
-      if (!crawler) {
-        console.error(chalk.red(`No crawler found for ${profile}`));
+      const result = await crawler.crawl();
+      if (!result) {
+        console.info(chalk.red(`Failed to crawl ${profile}`));
         continue;
       }
 
-      const result = await crawler.crawl();
       console.info(chalk.blue(`Done crawling ${profile}`));
-      console.log(result);
+      data.push(result);
     }
   }
-  console.info(chalk.blue('Done crawling'));
 
-  // const page = await browser.newPage();
+  // output to csv
+  outputCSV<Influencer>(data, `output.csv`);
 
-  // await page.goto('https://www.tiktok.com/@mrnigelng');
-  // // wait for 5 secs
-  // await waitForTimeout(5000);
-  // await page.screenshot({ path: 'screen-capture.png' });
+  console.info(chalk.blue(`Done crawling and output to csv`));
 
   await browser.close();
 }

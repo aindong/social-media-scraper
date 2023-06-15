@@ -66,6 +66,7 @@ export class TiktokCrawler extends AbstractCrawler {
         }
       });
     });
+
     await page.goto(this._profileUrl);
 
     try {

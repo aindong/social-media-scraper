@@ -7,7 +7,8 @@ export async function readFile(filePath: string): Promise<string[]> {
   // read the csv file from root directory
   fs.createReadStream(filePath, { encoding: 'utf-8' })
     .on('data', (chunk) => {
-      fileData.push(chunk.toString());
+      const lines = chunk.toString().split('\n');
+      fileData.push(...lines);
     })
     .on('end', async () => {
       console.info(`Finished reading the file`);

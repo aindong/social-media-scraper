@@ -37,6 +37,8 @@ export class InstagramCrawler extends AbstractCrawler {
     // await page.screenshot({ path: 'screen-capture-test.png' });
     console.log({ postCount, followers, following });
 
+    page.close();
+
     // let sharedData = await page.evaluate(() => {
     //   return window._sharedData.entry_data.ProfilePage[0].graphql.user;
     // });

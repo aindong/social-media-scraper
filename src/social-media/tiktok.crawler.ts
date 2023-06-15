@@ -20,6 +20,8 @@ export class TiktokCrawler extends AbstractCrawler {
     const influencer = await this.getInfluencer(page);
     await waitForTimeout(2000);
 
+    page.close();
+
     return influencer;
   }
 

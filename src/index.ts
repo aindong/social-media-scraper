@@ -5,6 +5,13 @@ import { Crawler } from './types/crawler';
 import { InstagramCrawler } from './social-media/instagram.crawler';
 import { TiktokCrawler } from './social-media/tiktok.crawler';
 import { Config } from './utils/config';
+import { readFile } from './utils/fileManager';
+
+async function getProfilesToCrawl(): Promise<string[]> {
+  const profiles = await readFile('profiles.txt');
+  console.info(profiles);
+  return profiles;
+}
 
 async function main() {
   console.info(chalk.blue('Launching social media scraper by aindong'));
@@ -18,10 +25,7 @@ async function main() {
     },
   });
 
-  const profiles = [
-    'https://www.tiktok.com/@mrnigelng',
-    // 'https://www.instagram.com/mrnigelng/',
-  ];
+  const profiles = await getProfilesToCrawl();
 
   console.info(chalk.blue(`Crawling ${profiles.length} profiles`));
   while (profiles.length > 0) {

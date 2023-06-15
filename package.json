@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build": "rimraf ./build && npx tsc",
+    "start": "node build/index.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register ./src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +18,8 @@
     "@commitlint/config-conventional": "^17.6.5",
     "@types/node": "^20.3.1",
     "husky": "^8.0.3",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.3"
   }
 }

@@ -1,3 +1,4 @@
+import { Page } from 'puppeteer';
 import type { Influencer } from '../types/influencer';
 import { Config } from '../utils/config';
 import { waitForTimeout } from '../utils/waitForTimeout';
@@ -8,13 +9,7 @@ export class InstagramCrawler extends AbstractCrawler {
     console.info(`Starting to crawl ${this._profileUrl}`);
     const page = await this._browser.newPage();
 
-    // login to instagram
-    await page.goto('https://www.instagram.com/accounts/login/');
-    await waitForTimeout(2000);
-    await page.type('input[name="username"]', Config.get('INSTAGRAM_USERNAME'));
-    await page.type('input[name="password"]', Config.get('INSTAGRAM_PASSWORD'));
-    // click on the login button
-    await page.click('button[type="submit"]');
+    await this.login(page);
     await waitForTimeout(5000);
     await page.goto(this._profileUrl);
     // wait for 2 secs to make sure the page is loaded
@@ -44,5 +39,15 @@ export class InstagramCrawler extends AbstractCrawler {
     // });
 
     return null;
+  }
+
+  async login(page: Page) {
+    // login to instagram
+    await page.goto('https://www.instagram.com/accounts/login/');
+    await waitForTimeout(2000);
+    await page.type('input[name="username"]', Config.get('INSTAGRAM_USERNAME'));
+    await page.type('input[name="password"]', Config.get('INSTAGRAM_PASSWORD'));
+    // click on the login button
+    await page.click('button[type="submit"]');
   }
 }

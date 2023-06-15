@@ -1,4 +1,4 @@
-import type { Browser } from 'puppeteer';
+import type { Browser, Page } from 'puppeteer';
 import type { Influencer } from '../types/influencer';
 import type { Crawler } from '../types/crawler';
 
@@ -10,6 +10,14 @@ export class AbstractCrawler implements Crawler {
   constructor(browser: Browser, profileUrl: string) {
     this._browser = browser;
     this._profileUrl = profileUrl;
+  }
+
+  async login(page: Page): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+
+  async getInfluencer(page: Page): Promise<Influencer | null> {
+    throw new Error('Method not implemented.');
   }
 
   async crawl(): Promise<Influencer | null> {

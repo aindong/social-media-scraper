@@ -1,7 +1,6 @@
 import chalk from 'chalk';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
-import { waitForTimeout } from './utils/waitForTimeout';
 import { Crawler } from './types/crawler';
 import { InstagramCrawler } from './social-media/instagram.crawler';
 import { TiktokCrawler } from './social-media/tiktok.crawler';

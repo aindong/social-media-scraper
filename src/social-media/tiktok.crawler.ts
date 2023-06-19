@@ -51,7 +51,9 @@ export class TiktokCrawler extends AbstractCrawler {
               profilePicUrl: userInfo.user.avatarLarger,
               bio: userInfo.user.signature,
               platform: 'tiktok',
-              externalUrl: userInfo.user.bioLink.link,
+              externalUrl: userInfo.user.bioLink
+                ? userInfo.user.bioLink.link
+                : '',
               followerCount: userInfo.stats.followerCount,
               followingCount: userInfo.stats.followingCount,
               isPrivate: userInfo.user.privateAccount,

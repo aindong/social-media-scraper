@@ -45,7 +45,7 @@ export default async function SocialMediaScraper(
   }
 
   // output to csv
-  outputCSV<Influencer>(data, `output.csv`);
+  // outputCSV<Influencer>(data, `output.csv`);
 
   console.info(chalk.blue(`Done crawling and output to csv`));
 

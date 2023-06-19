@@ -56,9 +56,7 @@ export class TiktokCrawler extends AbstractCrawler {
               followingCount: userInfo.stats.followingCount,
               isPrivate: userInfo.user.privateAccount,
               isVerified: userInfo.user.verified,
-              engagementRate:
-                (userInfo.stats.heartCount / userInfo.stats.followerCount) *
-                100,
+              engagementRate: 0,
             };
 
             resolve(influencer);

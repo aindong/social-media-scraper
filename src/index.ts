@@ -2,8 +2,6 @@ import chalk from 'chalk';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { Crawler } from './types/crawler';
-import { InstagramCrawler } from './social-media/instagram.crawler';
-import { TiktokCrawler } from './social-media/tiktok.crawler';
 import { Config } from './utils/config';
 import { readFile } from './utils/fileManager';
 import { CrawlerFactory } from './social-media/crawler.factory';
@@ -16,7 +14,7 @@ async function getProfilesToCrawl(): Promise<string[]> {
   return profiles;
 }
 
-async function main() {
+async function main(profiles: string[]): Promise<Influencer[]> {
   console.info(chalk.blue('Launching social media scraper by aindong'));
 
   puppeteer.use(StealthPlugin());
@@ -28,7 +26,7 @@ async function main() {
     },
   });
 
-  const profiles = await getProfilesToCrawl();
+  // const profiles = await getProfilesToCrawl();
 
   console.info(chalk.blue(`Crawling ${profiles.length} profiles`));
   const data: Influencer[] = [];
@@ -57,6 +55,16 @@ async function main() {
   console.info(chalk.blue(`Done crawling and output to csv`));
 
   await browser.close();
+
+  return data;
 }
 
-main().catch(console.error);
+export default async function SocialMediaScraper(
+  profiles: string[],
+): Promise<Influencer[]> {
+  const data = await main(profiles);
+
+  return data;
+}
+
+// main().catch(console.error);

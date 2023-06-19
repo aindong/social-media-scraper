@@ -58,6 +58,5 @@ jobs:
           body: ${{ steps.changelog.outputs.clean_changelog }}
       - name: Publish to npm
         run: npm publish --access public
-        working-directory: ./dist
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

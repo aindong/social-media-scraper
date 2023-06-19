@@ -38,7 +38,10 @@ jobs:
           github-token: ${{ secrets.GH_SECRET_TOKEN }}
           git-message: 'chore(release): {version}'
           release-count: 0
+          git-user-name: 'YOYODev'
+          git-user-email: 'developer@yoyo-holdings.com'
           skip-on-empty: false
+          output-file: 'false'
           config-file-path: '.versionrc.js'
       - name: Create Release
         uses: actions/create-release@v1

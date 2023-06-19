@@ -1,19 +1,20 @@
 {
-  "name": "social-media-scraper",
+  "name": "@aindong/social-media-scraper",
   "version": "0.2.1",
-  "description": "",
-  "main": "./build/index.js",
+  "description": "This project is for research purposes, not intended to steal content or data from any social media platform. It can only be used to scrape public data from social media platforms. The project is still under development, so it is not recommended to use it in production.",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
     "lint": "tsc",
-    "build": "tsup ./src/index.ts --format cjs,esm --dts-resolve --dts --minify --clean --sourcemap --legacy-output --target node16",
+    "build": "tsc --module commonjs",
     "start": "node build/index.js",
-    "dev": "ts-node-dev -r tsconfig-paths/register ./src/index.ts"
+    "dev": "ts-node-dev -r tsconfig-paths/register ./src/cli.ts"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Alleo Indong",
+  "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
@@ -39,5 +40,13 @@
     "puppeteer": "^20.7.1",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aindong/social-media-scraper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aindong/social-media-scraper/issues"
+  },
+  "homepage": "https://github.com/aindong/social-media-scraper#readme"
 }

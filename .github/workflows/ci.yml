@@ -1,4 +1,4 @@
-name: Bump version
+name: CI (Lint & Build)
 on:
   pull_request:
     branches:
@@ -7,8 +7,8 @@ on:
   workflow_dispatch: # Allow manual invocation of the workflow
 
 jobs:
-  bump-version:
-    name: Bump version
+  lint-build:
+    name: CI
     runs-on: ubuntu-latest
 
     steps:

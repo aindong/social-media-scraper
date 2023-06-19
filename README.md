@@ -1,6 +1,16 @@
 # Social Media Scraper
 This project is for research purposes, not intended to steal content or data from any social media platform. It can only be used to scrape public data from social media platforms. The project is still under development, so it is not recommended to use it in production.
 
+# Usage
+```typescript
+import SocialMediaScraper from '@aindong/social-media-scraper';
+
+async function main() {
+    const data = await SocialMediaScraper.scrape(['https://www.instagram.com/mrnigelng/', 'https://www.tiktok.com/@mrnigelng']);
+    console.log(data);
+}
+```
+
 # Contribution Guidelines
 
 Welcome to the project! We appreciate your interest in contributing. By participating in this project, you agree to abide by the [Code of Conduct](./CODE_OF_CONDUCT.md).

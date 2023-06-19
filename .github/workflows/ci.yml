@@ -1,0 +1,29 @@
+name: CI (Lint & Build)
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch: # Allow manual invocation of the workflow
+
+jobs:
+  lint-build:
+    name: CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+          cache: 'pnpm'
+      - name: install conventional-changelog dependency
+        run: pnpm install --frozen-lockfile
+      - run: pnpm run lint && pnpm run build
